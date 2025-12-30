@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: SuperAppBarber
+  datasource:
+    url: jdbc:postgresql://localhost:5432/super_app_barber
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none # create | update | validate | none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  jackson:
+    time-zone: UTC
+
+server:
+  port: 8080
