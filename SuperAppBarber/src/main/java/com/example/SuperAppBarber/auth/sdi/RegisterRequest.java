@@ -1,0 +1,18 @@
+package com.example.SuperAppBarber.auth.sdi;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class RegisterRequest {
+
+    @NotBlank
+    private String phone;
+
+    @NotBlank
+    private String password;
+
+    private String email;
+}
