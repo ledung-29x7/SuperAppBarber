@@ -10,11 +10,13 @@ import com.example.SuperAppBarber.staff.model.StaffEntity;
 
 public interface StaffRepository extends JpaRepository<StaffEntity, UUID> {
 
-    List<StaffEntity> findBySalonId(UUID salonId);
+    List<StaffEntity> findAllBySalonId(UUID salonId);
 
     List<StaffEntity> findBySalonIdAndActiveTrue(UUID salonId);
 
     Optional<StaffEntity> findByUserIdAndSalonId(UUID userId, UUID salonId);
 
     boolean existsBySalonIdAndUserId(UUID salonId, UUID userId);
+
+    Optional<StaffEntity> findByUserId(UUID userId);
 }
