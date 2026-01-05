@@ -3,6 +3,7 @@ package com.example.SuperAppBarber.promotion.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -35,7 +36,7 @@ public class PromotionEntity {
     private DiscountType discountType;
 
     @Column(name = "discount_value")
-    private Double discountValue;
+    private BigDecimal discountValue;
 
     @Column(name = "start_date")
     private LocalDate startDate;

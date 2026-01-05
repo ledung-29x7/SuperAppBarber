@@ -22,4 +22,7 @@ public class BaseEntity {
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
+
+    @Column(name = "deleted_at")
+    protected LocalDateTime deletedAt;
 }

@@ -1,5 +1,6 @@
 package com.example.SuperAppBarber.servicecatalog.model;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import com.example.SuperAppBarber.common.base.BaseEntity;
@@ -35,7 +36,7 @@ public class ServiceEntity extends BaseEntity {
 
     private String name;
 
-    private Double price;
+    private BigDecimal price;
 
     @Column(name = "duration_minutes")
     private Integer durationMinutes;
