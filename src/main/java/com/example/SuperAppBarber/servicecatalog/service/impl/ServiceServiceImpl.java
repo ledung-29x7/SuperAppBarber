@@ -31,7 +31,7 @@ public class ServiceServiceImpl implements ServiceService {
         e.setName(request.getName());
         e.setPrice(request.getPrice());
         e.setDurationMinutes(request.getDurationMinutes());
-
+        e.setActive(true);
         serviceRepository.save(e);
 
         return toResponse(e);

@@ -21,52 +21,52 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1/salons/{salonId}/staff/{staffId}/services")
+@RequestMapping("/salons/{salonId}/staff/{staffId}/services")
 @RequiredArgsConstructor
 @PreAuthorize("hasRole('OWNER')")
 public class StaffServiceController {
 
-    private final StaffServiceService staffServiceService;
+        private final StaffServiceService staffServiceService;
 
-    @PostMapping
-    public ApiResponse<List<StaffServiceResponse>> assign(
-            @PathVariable UUID salonId,
-            @PathVariable UUID staffId,
-            @RequestBody @Valid AssignServiceRequest request) {
-        return ApiResponse.<List<StaffServiceResponse>>builder()
-                .success(true)
-                .code("00")
-                .message("Assigned")
-                .data(
-                        staffServiceService.assign(
-                                salonId, staffId, request.getServiceId()))
-                .build();
-    }
+        @PostMapping
+        public ApiResponse<List<StaffServiceResponse>> assign(
+                        @PathVariable UUID salonId,
+                        @PathVariable UUID staffId,
+                        @RequestBody @Valid AssignServiceRequest request) {
+                return ApiResponse.<List<StaffServiceResponse>>builder()
+                                .success(true)
+                                .code("00")
+                                .message("Assigned")
+                                .data(
+                                                staffServiceService.assign(
+                                                                salonId, staffId, request.getServiceId()))
+                                .build();
+        }
 
-    @DeleteMapping("/{serviceId}")
-    public ApiResponse<List<StaffServiceResponse>> unassign(
-            @PathVariable UUID salonId,
-            @PathVariable UUID staffId,
-            @PathVariable Long serviceId) {
-        return ApiResponse.<List<StaffServiceResponse>>builder()
-                .success(true)
-                .code("00")
-                .message("Unassigned")
-                .data(
-                        staffServiceService.unassign(
-                                salonId, staffId, serviceId))
-                .build();
-    }
+        @DeleteMapping("/{serviceId}")
+        public ApiResponse<List<StaffServiceResponse>> unassign(
+                        @PathVariable UUID salonId,
+                        @PathVariable UUID staffId,
+                        @PathVariable Long serviceId) {
+                return ApiResponse.<List<StaffServiceResponse>>builder()
+                                .success(true)
+                                .code("00")
+                                .message("Unassigned")
+                                .data(
+                                                staffServiceService.unassign(
+                                                                salonId, staffId, serviceId))
+                                .build();
+        }
 
-    @GetMapping
-    public ApiResponse<List<StaffServiceResponse>> getServices(
-            @PathVariable UUID salonId,
-            @PathVariable UUID staffId) {
-        return ApiResponse.<List<StaffServiceResponse>>builder()
-                .success(true)
-                .code("00")
-                .message("Success")
-                .data(staffServiceService.getServicesByStaff(salonId, staffId))
-                .build();
-    }
+        @GetMapping
+        public ApiResponse<List<StaffServiceResponse>> getServices(
+                        @PathVariable UUID salonId,
+                        @PathVariable UUID staffId) {
+                return ApiResponse.<List<StaffServiceResponse>>builder()
+                                .success(true)
+                                .code("00")
+                                .message("Success")
+                                .data(staffServiceService.getServicesByStaff(salonId, staffId))
+                                .build();
+        }
 }
