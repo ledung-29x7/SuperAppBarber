@@ -18,7 +18,11 @@ public enum ErrorCode {
 
     // Business
     RESOURCE_NOT_FOUND("BUS_01", "Resource not found"),
-    DATA_INVALID("BUS_02", "Data invalid");
+    DATA_INVALID("BUS_02", "Data invalid"),
+
+    BOOKING_CONFLICT("BOOK_01", "Time slot already booked"),
+    STAFF_NOT_AVAILABLE("BOOK_02", "Staff not available"),
+    BOOKING_NOT_CANCELLABLE("BOOK_03", "Booking cannot be cancelled");
 
     private final String code;
     private final String message;

@@ -1,6 +1,7 @@
 package com.example.SuperAppBarber.staff.repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +25,20 @@ public interface DayOffRepository extends JpaRepository<DayOffEntity, Long>, Jpa
             LocalDate date2);
 
     List<DayOffEntity> findByStaffIdAndDeletedAtIsNull(UUID staffId);
+
+    @Query("""
+                SELECT COUNT(d) > 0
+                FROM DayOffEntity d
+                WHERE d.salonId = :salonId
+                  AND (:staffId IS NULL OR d.staffId = :staffId)
+                  AND d.status = 'APPROVED'
+                  AND :date BETWEEN d.startDate AND d.endDate
+                  AND d.deletedAt IS NULL
+            """)
+    boolean existsDayOff(
+            @Param("staffId") UUID staffId,
+            @Param("salonId") UUID salonId,
+            @Param("date") LocalDate date);
 
     // @Query("""
     // SELECT d

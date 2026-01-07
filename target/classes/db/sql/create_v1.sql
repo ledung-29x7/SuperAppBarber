@@ -376,3 +376,21 @@ ON bookings(staff_id, start_time, end_time);
 
 CREATE INDEX idx_subscription_salon
 ON subscriptions(salon_id);
+
+
+CREATE TABLE slot_holds (
+    id BIGSERIAL PRIMARY KEY,
+
+    salon_id UUID NOT NULL,
+    staff_id UUID NOT NULL,
+
+    start_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP NOT NULL,
+
+    holder_key VARCHAR(100) NOT NULL,
+    -- userId nếu login, phone nếu guest
+
+    expires_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT now()
+);
+

@@ -14,10 +14,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "bookings")
@@ -25,13 +25,16 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class BookingEntity extends BaseEntity {
 
     @Id
     @GeneratedValue
     @Column(name = "booking_id")
     private UUID bookingId;
+
+    @Column(name = "booking_code", nullable = false, unique = true)
+    private String bookingCode;
 
     @Column(name = "salon_id")
     private UUID salonId;

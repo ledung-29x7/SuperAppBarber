@@ -10,10 +10,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "customers")
@@ -21,13 +21,16 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class CustomerEntity extends BaseEntity {
 
     @Id
     @GeneratedValue
     @Column(name = "customer_id")
     private UUID customerId;
+
+    @Column(name = "user_id")
+    private UUID userId;
 
     @Column(name = "salon_id")
     private UUID salonId;

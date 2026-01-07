@@ -10,4 +10,14 @@ public class SecurityUtil {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return UUID.fromString(auth.getName());
     }
+
+    public static UUID getCurrentUserIdOptional() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated()
+                || "anonymousUser".equals(auth.getPrincipal())) {
+            return null;
+        }
+        return UUID.fromString(auth.getName());
+    }
+
 }

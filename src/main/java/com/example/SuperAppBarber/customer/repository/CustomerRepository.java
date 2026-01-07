@@ -15,4 +15,7 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, UUID> 
     Optional<CustomerEntity> findBySalonIdAndPhone(UUID salonId, String phone);
 
     List<CustomerEntity> findBySalonIdAndNameContainingIgnoreCase(UUID salonId, String keyword);
+
+    Optional<CustomerEntity> findByUserId(UUID userId);
+
 }
