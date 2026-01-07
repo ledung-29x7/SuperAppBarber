@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.SuperAppBarber.common.exception.BusinessException;
 import com.example.SuperAppBarber.common.exception.enums.ErrorCode;
+import com.example.SuperAppBarber.common.security.SecurityUtil;
+import com.example.SuperAppBarber.servicecatalog.dto.sdo.ServiceResponse;
 import com.example.SuperAppBarber.servicecatalog.dto.sdo.StaffServiceResponse;
 import com.example.SuperAppBarber.servicecatalog.model.ServiceEntity;
 import com.example.SuperAppBarber.servicecatalog.model.StaffServiceEntity;
@@ -102,5 +104,24 @@ public class StaffServiceServiceImpl implements StaffServiceService {
         r.setPrice(s.getPrice());
         r.setDurationMinutes(s.getDurationMinutes());
         return r;
+    }
+
+    @Override
+    public List<ServiceResponse> getMyAssignedServices() {
+
+        UUID userId = SecurityUtil.getCurrentUserId();
+
+        UUID staffId = staffRepository.findStaffIdByUserId(userId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND));
+
+        return staffServiceRepository.findServicesByStaffId(staffId)
+                .stream()
+                .map(s -> ServiceResponse.builder()
+                        .serviceId(s.getServiceId())
+                        .name(s.getName())
+                        .price(s.getPrice())
+                        .active(s.getActive())
+                        .build())
+                .toList();
     }
 }

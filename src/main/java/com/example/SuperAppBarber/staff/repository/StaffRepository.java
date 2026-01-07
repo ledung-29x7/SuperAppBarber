@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.example.SuperAppBarber.staff.model.StaffEntity;
 
@@ -21,4 +23,12 @@ public interface StaffRepository extends JpaRepository<StaffEntity, UUID> {
     boolean existsByStaffIdAndSalonId(UUID staffId, UUID salonId);
 
     Optional<StaffEntity> findByUserId(UUID userId);
+
+    // @Query(value = "select staff_id from staff where user_id = :userId ",
+    // nativeQuery = true)
+    // Optional<UUID> findStaffIdByUserId(UUID userId);
+
+    @Query(value = "SELECT staff_id FROM staff WHERE user_id = :userId", nativeQuery = true)
+    Optional<UUID> findStaffIdByUserId(@Param("userId") UUID userId);
+
 }
